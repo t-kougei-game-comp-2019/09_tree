@@ -16,7 +16,7 @@
 
 # テスト結果
 
-[![Build Status](https://travis-ci.com/t-kougei-game-comp-2019/09_tree.svg?branch=master)](https://travis-ci.com/t-kougei-game-comp-2019/09_tree)
+[![Build Status](https://travis-ci.com/kuryu86/09_tree.svg?branch=master)](https://travis-ci.com/kuryu86/09_tree)
 
 # 今回の問題
 
