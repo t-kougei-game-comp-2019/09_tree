@@ -32,22 +32,50 @@ void SetTree(TreeNode *Node,int data)
 			SetTree(Node->right, data);
 		}
 	}
-	
 }
+TreeNode searchTree(TreeNode *top,int Data)
+{
+	if (top->data==Data)
+		return *top;
+	else if (top->data>Data)
+		return searchTree(top->left, Data);
+	else
+		return searchTree(top->right, Data);
+}
+void showTree(TreeNode top)
+{
+	printf("%d ", top.data);
+	if (top.left==NULL)
+		printf("%d ", 0);
+	else
+		printf("%d ", top.left->data);
+	if (top.right==NULL)
+		printf("%d\n", 0);
+	else
+		printf("%d\n", top.right->data);
+}
+
 int main(int argc, char *argv[]) 
 {
-    char str[7];
+	char str[7];
 	TreeNode *Tree;
+	int MAX=0;
 	while (fgets(str, sizeof(str), stdin))
 	{
-		printf("%s", str);
 		int input=atoi(str);
+		if (input>MAX)
+			MAX = input;
 		if(Tree==NULL)
 		{
 			Tree = (TreeNode *)malloc(sizeof(TreeNode));
 			Tree->data = input;
 		}
+		else
+			SetTree(Tree, input);
 	}
-
+	for (size_t i = 0; i < MAX; i++)
+	{
+		showTree(searchTree(Tree,i+1));
+	}
 	return 0;
 }
