@@ -6,13 +6,13 @@ typedef struct _TreeNode
 	struct _TreeNode *right;
 	int data;
 }TreeNode;
-void SetTree(TreeNode *Node,int data)
+void SetTree(TreeNode *Node, int data)
 {
-	if(Node->data>data)
+	if (Node->data > data)
 	{
-		if(Node->left==NULL)
+		if (Node->left == NULL)
 		{
-			Node->left=(TreeNode *)malloc(sizeof(TreeNode));
+			Node->left = (TreeNode *)calloc(1,sizeof(TreeNode));
 			Node->left->data = data;
 		}
 		else
@@ -22,9 +22,9 @@ void SetTree(TreeNode *Node,int data)
 	}
 	else
 	{
-		if(Node->right==NULL)
+		if (Node->right == NULL)
 		{
-			Node->right=(TreeNode *)malloc(sizeof(TreeNode));
+			Node->right = (TreeNode *)calloc(1,sizeof(TreeNode));
 			Node->right->data = data;
 		}
 		else
@@ -33,11 +33,11 @@ void SetTree(TreeNode *Node,int data)
 		}
 	}
 }
-TreeNode searchTree(TreeNode *top,int Data)
+TreeNode searchTree(TreeNode *top, int Data)
 {
-	if (top->data==Data)
+	if (top->data == Data)
 		return *top;
-	else if (top->data>Data)
+	else if (top->data > Data)
 		return searchTree(top->left, Data);
 	else
 		return searchTree(top->right, Data);
@@ -45,37 +45,39 @@ TreeNode searchTree(TreeNode *top,int Data)
 void showTree(TreeNode top)
 {
 	printf("%d ", top.data);
-	if (top.left==NULL)
+	if (top.left == NULL)
 		printf("%d ", 0);
 	else
 		printf("%d ", top.left->data);
-	if (top.right==NULL)
+	if (top.right == NULL)
 		printf("%d\n", 0);
 	else
 		printf("%d\n", top.right->data);
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 	char str[7];
-	TreeNode *Tree;
-	int MAX=0;
+	TreeNode *Tree= NULL;
+	int MAX = 0;
 	while (fgets(str, sizeof(str), stdin))
 	{
-		int input=atoi(str);
-		if (input>MAX)
+		int input = atoi(str);
+		if (input > MAX)
 			MAX = input;
-		if(Tree==NULL)
+		if (Tree == NULL)
 		{
-			Tree = (TreeNode *)malloc(sizeof(TreeNode));
+			Tree = (TreeNode *)calloc(1,sizeof(TreeNode));
 			Tree->data = input;
 		}
 		else
 			SetTree(Tree, input);
 	}
-	for (size_t i = 0; i < MAX; i++)
+	for (int i = 0; i < MAX; i++)
 	{
+		//searchTree(Tree, i + 1);
 		showTree(searchTree(Tree,i+1));
+		//showTree(*Tree);
 	}
 	return 0;
 }
